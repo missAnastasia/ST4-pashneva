@@ -6,25 +6,29 @@
 <html>
 
 <c:set var="title" value="Error" scope="page" />
-<%@ include file="/WEB-INF/jspf/head.jspf" %>
+<%@ include file="/WEB-INF/jspf/head_main.jspf" %>
+
+<html>
+
+<c:set var="title" value="Home Page" />
+<%@ include file="/WEB-INF/jspf/head_main.jspf" %>
 
 <body>
+<jsp:include page="_header.jsp"></jsp:include>
+<jsp:include page="_menu_client.jsp"></jsp:include>
+
+</div>
+<div id="page" class="container">
 
 	<table id="main-container">
-
-		<%-- HEADER --%>
-			<jsp:include page="_header.jsp"></jsp:include>
-			<jsp:include page="_menu.jsp"></jsp:include>
-		<%-- HEADER --%>
 
 		<tr >
 			<td class="content">
 			<%-- CONTENT --%>
-				
-				<h2 class="error">
-					The following error occurred
-				</h2>
-			
+				<div class="title">
+					<h2 class="error"><fmt:message key="error_page_jsp.title"/></h2>
+				</div>
+
 				<%-- this way we obtain an information about an exception (if it has been occurred) --%>
 				<c:set var="code" value="${requestScope['javax.servlet.error.status_code']}"/>
 				<c:set var="message" value="${requestScope['javax.servlet.error.message']}"/>

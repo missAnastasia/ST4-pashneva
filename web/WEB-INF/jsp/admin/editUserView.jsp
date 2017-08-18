@@ -3,12 +3,12 @@
 
 <html>
 <c:set var="title" value="Login Page" />
-<%@ include file="/WEB-INF/jspf/head.jspf" %>
+<%@ include file="/WEB-INF/jspf/head_main.jspf" %>
 
 <body>
 
 <jsp:include page="/WEB-INF/jsp/_header.jsp"></jsp:include>
-<jsp:include page="/WEB-INF/jsp/_menu.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/jsp/_menu_client.jsp"></jsp:include>
 
 <h3>Create User Page</h3>
 

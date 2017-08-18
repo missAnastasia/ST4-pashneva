@@ -14,12 +14,11 @@ import java.util.List;
 
 public class MysqlUserDAO  implements UserDAO {
 
-    private static final String GET_ALL_USERS = "SELECT * FROM users u INNER JOIN users_lang ul ON u.id = ul.user_id";
-    private static final String GET_USER_BY_ID = "SELECT * FROM users u INNER JOIN users_lang ul ON u.id = ul.user_id WHERE u.id=?";
-    private static final String GET_USER_BY_LOGIN = "SELECT * FROM users u INNER JOIN users_lang ul ON u.id = ul.user_id WHERE u.login=?";
-    private static final String ADD_USER = "INSERT INTO users VALUE(DEFAULT, ?, ?, ?, ?, ?)";
-    private static final String ADD_USER_LANG = "INSERT INTO users_lang VALUE(DEFAULT, ?, ?, ?, ?)";
-    private static final String UPDATE_USER_BY_ID = "UPDATE users SET login=?, password=?, role_id=?, user_status_id=? WHERE id=?";
+    private static final String GET_ALL_USERS = "SELECT * FROM users";
+    private static final String GET_USER_BY_ID = "SELECT * FROM users WHERE id=?";
+    private static final String GET_USER_BY_LOGIN = "SELECT * FROM users  WHERE login=?";
+    private static final String ADD_USER = "INSERT INTO users VALUE(DEFAULT, ?, ?, ?, ?, ?, ?)";
+    private static final String UPDATE_USER_BY_ID = "UPDATE users SET login=?, password=?, first_name=?, second_name=?, role_id=?, user_status_id=? WHERE id=?";
     private static final String DELETE_USER_BY_ID = "DELETE FROM users WHERE id=?";
 
     private static final String ENTITY_ID = "id";
@@ -42,6 +41,8 @@ public class MysqlUserDAO  implements UserDAO {
             int k = 1;
             statement.setString(k++, user.getLogin());
             statement.setString(k++, user.getPassword());
+            statement.setString(k++, user.getFirstName());
+            statement.setString(k++, user.getSecondName());
             statement.setInt(k++, user.getRoleId());
             statement.setInt(k++, user.getUserStatusId());
 
@@ -49,14 +50,8 @@ public class MysqlUserDAO  implements UserDAO {
                 generatedKeys = statement.getGeneratedKeys();
                 if (generatedKeys.next()) {
                     user.setId(generatedKeys.getInt(1));
+                    return true;
                 }
-                statement = connection.prepareStatement(ADD_USER_LANG);
-
-                k = 1;
-                statement.setInt(k++, user.getId());
-                //statement.setInt();
-
-                return true;
             }
             return false;
         } catch (SQLException e) {

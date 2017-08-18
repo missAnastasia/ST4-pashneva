@@ -9,7 +9,7 @@
                 <p><fmt:message key="header_jsp.car_rental_title"/></p>
             </div>
             <div id="social">
-                <a class="login-a" href="http://templated.co" rel="nofollow"><fmt:message key="header_jsp.login"/></a>
+                <a class="login-a" href="controller?command=getLoginPageCommand" rel="nofollow"><fmt:message key="header_jsp.login"/></a>
             </div>
         </div>
 
