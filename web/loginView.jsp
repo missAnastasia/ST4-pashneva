@@ -17,15 +17,15 @@
     </div>
 
     <div id="login-div">
-        <form  action="/" autocomplete="on" method="post">
+        <form  action="controller?command=loginCommand"0 autocomplete="on" method="post">
             <h3>
                 <label for="login" class="login"><fmt:message key="login_jsp.label.login"/></label>
-                <input id="login" name="login" type="email" placeholder="mymail@mail.com" maxlength="45" required/>
+                <input id="login" name="login" type="email" placeholder="example@site.com" maxlength="45" required/>
                 <span class="form__error"><fmt:message key="validation.login"/></span>
             </h3>
             <h3>
                 <label for="password" class="password"><fmt:message key="login_jsp.label.password"/></label>
-                <input id="password" name="password" minlength="3" maxlength="45" required type="password" placeholder="xxxxxxxx" />
+                <input id="password" name="password" minlength="8" maxlength="45" required type="password" placeholder="Xx1_" pattern="\w+"/>
                 <span class="form__error"><fmt:message key="validation.password"/></span>
             </h3>
             <h3 class="keeplogin">
