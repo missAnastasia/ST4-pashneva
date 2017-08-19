@@ -9,15 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class GetHomePageCommand extends Command {
+public class ChangeLocaleCommand extends Command {
 
-    private static final Logger LOG = Logger.getLogger(GetHomePageCommand.class);
+    private static final Logger LOG = Logger.getLogger(ChangeLocaleCommand.class);
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         LOG.debug("Command starts");
-
-        response.sendRedirect(Path.PAGE_HOME);
+        request.getRequestDispatcher(Path.PAGE_CHANGE_LOCALE).forward(request, response);
         LOG.debug("Command finished");
     }
 }

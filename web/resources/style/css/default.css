@@ -125,6 +125,33 @@ hr {
 	height: 600px;
 }
 
+/*#lang-header
+{
+	position: absolute;
+	top: 1em;
+	right: 2em;
+}
+
+.lang-item
+{
+	float: left;
+	display: block;
+}
+
+.lang-submit {
+	background: none;
+
+}
+
+.lang-separator
+{
+	float: left;
+	display: block;
+	!*position: relative;*!
+	top: 1em;
+	right: 2em;
+}*/
+
 #social
 {
 	position: absolute;
@@ -484,8 +511,9 @@ ul.style3 .first {
 		border-top: 1px solid rgba(0,0,0,.05);
 	}
 	
-	#portfolio
+	#portfolio .lang-form
 	{
+		margin-top: 6em;
 	}
 
 	#portfolio .box
@@ -503,8 +531,19 @@ ul.style3 .first {
 		color: rgba(0,0,0,0.7);
 	}
 
-	#portfolio .title
+	#portfolio .lang-select
 	{
+		background: none;
+		line-height: 70px;
+		letter-spacing: 0.05em;
+		text-decoration: none;
+		text-transform: uppercase;
+		text-align: center;
+		font-size: 1em;
+		font-weight: 200;
+		color: #000;
+		border: none;
+
 	}
 
 	#portfolio .title h2
@@ -538,6 +577,18 @@ ul.style3 .first {
 	.column4
 	{
 		float: right;
+		text-align: right;
+	}
+
+	select {
+		border: none;
+		background: none;
+		text-transform: uppercase;
+		font-weight: 300;
+		color: #2D2D2D;
+		font-size: 1em;
+		margin-top: 2em;
+		width: 10%;
 	}
 
 /*********************************************************************************/

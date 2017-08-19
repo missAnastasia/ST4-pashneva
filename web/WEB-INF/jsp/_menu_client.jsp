@@ -28,5 +28,6 @@
             </c:when>
         </c:choose>
         <li><a href="${pageContext.request.contextPath}/contactsView.jsp" accesskey="5" title=""><fmt:message key="header_jsp.menu.client.contact_us"/></a></li>
+
     </ul>
 </div>

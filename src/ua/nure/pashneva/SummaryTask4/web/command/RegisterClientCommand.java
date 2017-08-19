@@ -17,9 +17,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Locale;
 
-public class CreateUserCommand extends Command {
+public class RegisterClientCommand extends Command {
 
-    private static final Logger LOG = Logger.getLogger(NoCommand.class);
+    private static final Logger LOG = Logger.getLogger(RegisterClientCommand.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
@@ -39,37 +39,39 @@ public class CreateUserCommand extends Command {
         String secondName = request.getParameter("secondName");
         LOG.trace("Request parameter: secondName --> " + secondName);
 
-        String role = request.getParameter("role");
+        /*String role = request.getParameter("role");
         LOG.trace("Request parameter: role --> " + role);
 
         String status = request.getParameter("status");
-        LOG.trace("Request parameter: status --> " + status);
+        LOG.trace("Request parameter: status --> " + status);*/
 
         if (login == null || password == null || login.isEmpty() || password.isEmpty() ||
-                firstName == null || secondName == null || firstName.isEmpty() || secondName.isEmpty() ||
-                role == null || status == null || role.isEmpty() || status.isEmpty()) {
+                firstName == null || secondName == null || firstName.isEmpty() || secondName.isEmpty()
+                /*role == null || status == null || role.isEmpty() || status.isEmpty()*/) {
             throw new AppException("Login/password/first name/second name/role/status cannot be empty");
         }
 
         User user = new User(login, password, firstName, secondName,
-                Role.getRoleOrdinal(role), UserStatus.getUserStatusOrdinal(status));
+                Role.getRoleOrdinal(Role.CLIENT), UserStatus.getUserStatusOrdinal(UserStatus.UNBLOCKED));
 
         try {
             User existingUser = DAOFactory.getInstance().getUserDAO().read(user.getLogin());
-            if (existingUser == null) {
-                String locale = request.getSession().getAttribute("locale").toString();
-
-                //DAOFactory.getInstance().getUserDAO().create(user);
-            } else {
+            LOG.trace("Request parameter: existingUser --> " + existingUser);
+            if (existingUser != null) {
+                LOG.debug("existingUser != null --> true");
                 throw new AppException("User already exists");
+            } else {
+                LOG.debug("existingUser != null --> false");
+                DAOFactory.getInstance().getUserDAO().create(user);
             }
         } catch (Exception e) {
-            throw new AppException("Cannot create user");
+            LOG.debug("catch section");
+            throw new AppException(e.getMessage());
         }
 
         LOG.trace("Insert into DB: user --> " + user);
 
         LOG.debug("Command finished");
-        response.sendRedirect(Path.PAGE_HOME);
+        response.sendRedirect(Path.PAGE_LOGIN);
     }
 }

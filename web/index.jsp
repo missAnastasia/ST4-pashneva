@@ -3,6 +3,6 @@
 
 <html>
 <body>
-	<a href="settings.jsp"><fmt:message key="index_jsp.link.settings"/></a>
+	<a href="settingsView.jsp"><fmt:message key="index_jsp.link.settings"/></a>
 </body>
 </html>

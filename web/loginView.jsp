@@ -7,8 +7,8 @@
 
 <body>
 
-<jsp:include page="WEB-INF/jsp/_header.jsp"></jsp:include>
-<jsp:include page="WEB-INF/jsp/_menu_client.jsp"></jsp:include>
+<jsp:include page="WEB-INF/jsp/_header.jsp"/>
+<jsp:include page="WEB-INF/jsp/_menu_client.jsp"/>
 
 </div>
 <div id="page" class="container">
@@ -17,14 +17,14 @@
     </div>
 
     <div id="login-div">
-        <form  action="controller?command=loginCommand"0 autocomplete="on" method="post">
+        <form  action="controller?command=loginCommand" autocomplete="on" method="post">
             <h3>
-                <label for="login" class="login"><fmt:message key="login_jsp.label.login"/></label>
+                <label for="login" class="login"><fmt:message key="login_jsp.label.login"/></label><br>
                 <input id="login" name="login" type="email" placeholder="example@site.com" maxlength="45" required/>
                 <span class="form__error"><fmt:message key="validation.login"/></span>
             </h3>
             <h3>
-                <label for="password" class="password"><fmt:message key="login_jsp.label.password"/></label>
+                <label for="password" class="password"><fmt:message key="login_jsp.label.password"/></label><br>
                 <input id="password" name="password" minlength="8" maxlength="45" required type="password" placeholder="Xx1_" pattern="\w+"/>
                 <span class="form__error"><fmt:message key="validation.password"/></span>
             </h3>
@@ -32,11 +32,11 @@
                 <input type="checkbox" name="rememberMe" value="Y" id="loginkeeping"/>
                 <label for="loginkeeping"><fmt:message key="login_jsp.label.remember_me"/></label>
             </h3>
-             <input type="submit" value="<fmt:message key="login_jsp.label.submit"/>"/>
+             <input type="submit" value="<fmt:message key="login_jsp.submit"/>"/>
 
             <p class="change_link">
                 <fmt:message key="login_jsp.label.not_a_member"/>
-                <a href="" class="to_register"><fmt:message key="login_jsp.label.sign_in"/></a>
+                <a href="controller?command=getRegisterClientPageCommand" class="to_register"><fmt:message key="login_jsp.label.sign_in"/></a>
             </p>
         </form>
     </div>
@@ -74,7 +74,7 @@
 
 <p style="color:blue;">User Name: tom, password: tom001 or jerry/jerry001</p>--%>
 
-<jsp:include page="WEB-INF/jsp/_footer.jsp"></jsp:include>
+<jsp:include page="WEB-INF/jsp/_footer.jsp"/>
 
 </body>
 </html>

@@ -26,7 +26,10 @@ public class CommandContainer {
 		commands.put("noCommand", new NoCommand());
 		commands.put("getHomePageCommand", new GetHomePageCommand());
 		commands.put("getEditUserPageCommand", new GetEditUserPageCommand());
-		commands.put("createUserCommand", new CreateUserCommand());
+		commands.put("registerClientCommand", new RegisterClientCommand());
+		commands.put("changeLocaleCommand", new ChangeLocaleCommand());
+		commands.put("getSettingsPageCommand", new GetSettingsPageCommand());
+		commands.put("getRegisterClientPageCommand", new GetRegisterClientPageCommand());
 		
 		// client commands
 		commands.put("listMenu", new ListMenuCommand());

@@ -1,15 +1,6 @@
 <%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 
-<%--
-<div
-        style="background: #E0E0E0; text-align: center; padding: 5px; margin-top: 10px;">
-
-    @Copyright o7planning.org
-
-</div>
---%>
-
 <div id="portfolio-wrapper">
     <div id="portfolio" class="container">
         <div class="title">
@@ -26,6 +17,15 @@
                         <li><a href="#" class="icon icon-tumblr"><span>Google+</span></a></li>
                         <li><a href="#" class="icon icon-rss"><span>Pinterest</span></a></li>
                     </ul>
+                </div>
+            </div>
+            <div class="column4">
+                <div class="box">
+                    <div class="lang-form">
+                    <a id="lang-link" href="${pageContext.request.contextPath}/settingsView.jsp">
+                        <img id="lang-img" src="${pageContext.request.contextPath}/resources/style/images/1996.png" width="50"/>
+                    </a>
+                    </div>
                 </div>
             </div>
         </div>
