@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class GetAboutUsPageCommand extends Command {
 
-    private static final Logger LOG = Logger.getLogger(UserInfoCommand.class);
+    private static final Logger LOG = Logger.getLogger(GetAboutUsPageCommand.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {

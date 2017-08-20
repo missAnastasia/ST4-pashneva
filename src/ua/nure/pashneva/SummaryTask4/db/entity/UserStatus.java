@@ -10,7 +10,11 @@ public enum  UserStatus {
 
     public static int getUserStatusOrdinal(String name) {
         UserStatus userStatus = UserStatus.valueOf(name) ;
-        return userStatus.ordinal();
+        return userStatus.ordinal() + 1;
+    }
+
+    public static int getUserStatusOrdinal(UserStatus userStatus) {
+        return userStatus.ordinal() + 1;
     }
 
     public String getName() {

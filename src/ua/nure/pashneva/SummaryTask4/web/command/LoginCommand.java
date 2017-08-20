@@ -58,10 +58,9 @@ public class LoginCommand extends Command {
 
 		Role userRole = Role.getRole(user);
 		LOG.trace("userRole --> " + userRole);
-		
-		String forward = Path.PAGE_ERROR_PAGE;
 
-		if (userRole == Role.ADMIN) {
+
+		/*if (userRole == Role.ADMIN) {
 			//forward = Path.COMMAND_LIST_ORDERS;
 			forward = Path.COMMAND_HOME;
 		}
@@ -69,7 +68,7 @@ public class LoginCommand extends Command {
 		if (userRole == Role.CLIENT) {
 			//forward = Path.COMMAND_LIST_MENU;
 			forward = Path.COMMAND_HOME;
-		}
+		}*/
 
 		SessionManager.storeLoginedUser(session, user, userRole);
 		//session.setAttribute("user", user);
@@ -94,7 +93,7 @@ public class LoginCommand extends Command {
 		}
 
 		LOG.debug("Command finished");
-		response.sendRedirect(forward);
+		response.sendRedirect(Path.PAGE_HOME);
 	}
 
 }

@@ -705,6 +705,11 @@ ul.style3 .first {
 	margin-bottom: 2em;
 }
 
+#user-info-div {
+	width: 60%;
+	position: relative;
+}
+
 /**** advanced input styling ****/
 /* placeholder */
 ::-webkit-input-placeholder  {

@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class GetLoginPageCommand extends Command {
+public class GetErrorPageCommand extends Command {
 
-    private static final Logger LOG = Logger.getLogger(GetLoginPageCommand.class);
+    private static final Logger LOG = Logger.getLogger(GetErrorPageCommand.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         LOG.debug("Command starts");
-        request.getRequestDispatcher(Path.PAGE_LOGIN).forward(request, response);
+        request.getRequestDispatcher(Path.PAGE_ERROR_PAGE).forward(request, response);
         LOG.debug("Command finished");
     }
 }

@@ -22,7 +22,7 @@ public class CommandContainer {
 		commands.put("loginCommand", new LoginCommand());
 		commands.put("getLoginPageCommand", new GetLoginPageCommand());
 		commands.put("logoutCommand", new LogoutCommand());
-		commands.put("userInfoCommand", new UserInfoCommand());
+		commands.put("getUserInfoPageCommand", new GetUserInfoPageCommand());
 		commands.put("noCommand", new NoCommand());
 		commands.put("getHomePageCommand", new GetHomePageCommand());
 		commands.put("getEditUserPageCommand", new GetEditUserPageCommand());
@@ -30,6 +30,8 @@ public class CommandContainer {
 		commands.put("changeLocaleCommand", new ChangeLocaleCommand());
 		commands.put("getSettingsPageCommand", new GetSettingsPageCommand());
 		commands.put("getRegisterClientPageCommand", new GetRegisterClientPageCommand());
+		commands.put("getContactsPageCommand", new GetContactsPageCommand());
+		commands.put("getErrorPageCommand", new GetErrorPageCommand());
 		
 		// client commands
 		commands.put("listMenu", new ListMenuCommand());

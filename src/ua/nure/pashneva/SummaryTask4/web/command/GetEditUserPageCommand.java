@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class GetEditUserPageCommand extends Command {
 
-    private static final Logger LOG = Logger.getLogger(NoCommand.class);
+    private static final Logger LOG = Logger.getLogger(GetEditUserPageCommand.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {

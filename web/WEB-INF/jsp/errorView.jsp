@@ -1,16 +1,11 @@
-<%@ page isErrorPage="true" %>
+<%@ page isErrorPage="true"%>
 <%@ page import="java.io.PrintWriter" %>
 <%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 
 <html>
 
-<c:set var="title" value="Error" scope="page" />
-<%@ include file="/WEB-INF/jspf/head_main.jspf" %>
-
-<html>
-
-<c:set var="title" value="Home Page" />
+<c:set var="title" value="Error"/>
 <%@ include file="/WEB-INF/jspf/head_main.jspf" %>
 
 <body>
@@ -19,45 +14,32 @@
 
 </div>
 <div id="page" class="container">
-
-	<table id="main-container">
-
-		<tr >
-			<td class="content">
-			<%-- CONTENT --%>
-				<div class="title">
-					<h2 class="error"><fmt:message key="error_page_jsp.title"/></h2>
-				</div>
+    <div class="title">
+        <h2><fmt:message key="error_jsp.h2"/></h2>
+    </div>
 
 				<%-- this way we obtain an information about an exception (if it has been occurred) --%>
 				<c:set var="code" value="${requestScope['javax.servlet.error.status_code']}"/>
-				<c:set var="message" value="${requestScope['javax.servlet.error.message']}"/>
+				<c:set var="err_message" value="${requestScope['javax.servlet.error.message']}"/>
 				<c:set var="exception" value="${requestScope['javax.servlet.error.exception']}"/>
 				
 				<c:if test="${not empty code}">
-					<h3>Error code: ${code}</h3>
+					<h3>Error code: ${code}</h3><br>
 				</c:if>			
 				
-				<c:if test="${not empty message}">
-					<h3>${message}</h3>
+				<c:if test="${not empty err_message}">
+					<h3>${err_message}</h3><br>
 				</c:if>
 				
 				<c:if test="${not empty exception}">
-					<% exception.printStackTrace(new PrintWriter(out)); %>
+					<% exception.printStackTrace(new PrintWriter(out)); %><<br>
 				</c:if>
 				
 				<%-- if we get this page using forward --%>
-				<c:if test="${not empty requestScope.errorMessage}">
-					<h3>${requestScope.errorMessage}</h3>
+				<c:if test="${not empty requestScope.message}">
+					<h3>${requestScope.message}</h3><br>
 				</c:if>
-
-			<%-- CONTENT --%>
-			</td>
-		</tr>
-
-
-		
-	</table>
+</div>
 	<jsp:include page="_footer.jsp"></jsp:include>
 </body>
 </html>

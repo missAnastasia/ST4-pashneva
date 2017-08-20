@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserDAO {
 
-    boolean create(User user, Language language);
+    boolean create(User user);
     User read(Integer id);
     User read(String login);
     List<User> readAll();

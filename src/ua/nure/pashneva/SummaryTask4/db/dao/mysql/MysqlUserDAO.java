@@ -30,7 +30,7 @@ public class MysqlUserDAO  implements UserDAO {
     private static final String USER_STATUS_ID = "user_status_id";
 
     @Override
-    public boolean create(User user, Language language) {
+    public boolean create(User user) {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet generatedKeys = null;

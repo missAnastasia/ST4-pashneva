@@ -32,7 +32,8 @@ public class Controller extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		process(request, response);
+		/*process(request, response);*/
+		doGet(request, response);
 	}
 
 	/**
@@ -52,12 +53,16 @@ public class Controller extends HttpServlet {
 		LOG.trace("Obtained command --> " + command);
 
 		// execute command and get forward address
-		String forward = Path.PAGE_ERROR_PAGE;
+		//String forward = Path.PAGE_ERROR_PAGE;
 		try {
-			/*forward = */command.execute(request, response);
+			command.execute(request, response);
 		} catch (AppException ex) {
-			request.setAttribute("errorMessage", ex.getMessage());
-			request.getRequestDispatcher(forward).forward(request, response);
+			/*request.setAttribute("errorMessage", ex.getMessage());
+			LOG.trace("Error previousPage --> " + request.getAttribute("previousPage"));
+
+			request.getRequestDispatcher(forward).forward(request, response);*/
+
+			response.sendRedirect(Path.COMMAND_MESSAGE_ERROR + ex.getMessage());
 		}
 		/*LOG.trace("Forward address --> " + forward);
 

@@ -17,6 +17,16 @@
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>MessageController</servlet-name>
+        <servlet-class>ua.nure.pashneva.SummaryTask4.web.MessageController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MessageController</servlet-name>
+        <url-pattern>/message</url-pattern>
+    </servlet-mapping>
+
     <filter>
     <filter-name>JDBCFilter</filter-name>
     <filter-class>ua.nure.pashneva.SummaryTask4.web.filter.JDBCFilter</filter-class>
@@ -70,11 +80,25 @@
         </init-param>
         <init-param>
             <param-name>common</param-name>
-            <param-value>logoutCommand noCommand userInfoCommand</param-value>
+            <param-value>
+                logoutCommand
+                noCommand
+                getUserInfoPageCommand
+            </param-value>
         </init-param>
         <init-param>
             <param-name>out-of-control</param-name>
-            <param-value>getHomePageCommand getLoginPageCommand loginCommand changeLocaleCommand getSettingsPageCommand getRegisterClientPageCommand registerClientCommand</param-value>
+            <param-value>
+                getHomePageCommand
+                getLoginPageCommand
+                loginCommand
+                changeLocaleCommand
+                getSettingsPageCommand
+                getRegisterClientPageCommand
+                registerClientCommand
+                getContactsPageCommand
+                getErrorPageCommand
+            </param-value>
         </init-param>
     </filter>
 
@@ -118,12 +142,12 @@
 
     <error-page>
         <exception-type>java.lang.Throwable</exception-type>
-        <location>/WEB-INF/jsp/error_page.jsp</location>
+        <location>/WEB-INF/jsp/errorView.jsp</location>
     </error-page>
 
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/jsp/error_page.jsp</location>
+        <location>/WEB-INF/jsp/errorView.jsp</location>
     </error-page>
 
 </web-app>

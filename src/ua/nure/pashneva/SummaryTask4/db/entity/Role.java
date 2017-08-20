@@ -10,7 +10,11 @@ public enum Role {
 
     public static int getRoleOrdinal(String name) {
         Role role = Role.valueOf(name) ;
-        return role.ordinal();
+        return role.ordinal() + 1;
+    }
+
+    public static int getRoleOrdinal(Role role) {
+        return role.ordinal() + 1;
     }
 
     public String getName() {
