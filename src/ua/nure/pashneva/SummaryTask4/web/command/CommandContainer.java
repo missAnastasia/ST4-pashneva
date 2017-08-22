@@ -32,6 +32,7 @@ public class CommandContainer {
 		commands.put("getRegisterClientPageCommand", new GetRegisterClientPageCommand());
 		commands.put("getContactsPageCommand", new GetContactsPageCommand());
 		commands.put("getErrorPageCommand", new GetErrorPageCommand());
+		commands.put("getConditionsPageCommand", new GetConditionsPageCommand());
 		
 		// client commands
 		commands.put("listMenu", new ListMenuCommand());

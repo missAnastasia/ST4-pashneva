@@ -31,7 +31,7 @@
         </div>
     </div>
     <div id="footer">
-        <p>&copy; <fmt:message key="header_jsp.title"/>. <fmt:message key="footer_jsp.footer"/></p>
+        <cstm:copyright/>
     </div>
 </div>
 </div>

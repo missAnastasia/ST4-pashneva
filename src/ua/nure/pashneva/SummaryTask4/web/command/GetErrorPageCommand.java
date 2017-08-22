@@ -16,6 +16,9 @@ public class GetErrorPageCommand extends Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
         LOG.debug("Command starts");
+        String message = request.getParameter("message");
+        LOG.trace("Request parameter: message --> " + message);
+        request.setAttribute("message", message);
         request.getRequestDispatcher(Path.PAGE_ERROR_PAGE).forward(request, response);
         LOG.debug("Command finished");
     }

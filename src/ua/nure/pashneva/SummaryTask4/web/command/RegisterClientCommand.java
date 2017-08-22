@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class RegisterClientCommand extends Command {
 
@@ -48,7 +49,9 @@ public class RegisterClientCommand extends Command {
         if (login == null || password == null || login.isEmpty() || password.isEmpty() ||
                 firstName == null || secondName == null || firstName.isEmpty() || secondName.isEmpty()
                 /*role == null || status == null || role.isEmpty() || status.isEmpty()*/) {
-            throw new AppException("Login/password/first name/second name/role/status cannot be empty");
+            String message = ResourceBundle.getBundle("resources", request.getLocale())
+                    .getString("message.error.empty_fields");
+            throw new AppException(message);
         }
 
         User user = new User(login, password, firstName, secondName,
@@ -59,7 +62,9 @@ public class RegisterClientCommand extends Command {
             LOG.trace("Request parameter: existingUser --> " + existingUser);
             if (existingUser != null) {
                 LOG.debug("existingUser != null --> true");
-                throw new AppException("User already exists");
+                String message = ResourceBundle.getBundle("resources", request.getLocale())
+                        .getString("message.error.user_already_exists");
+                throw new AppException(message);
             } else {
                 LOG.debug("existingUser != null --> false");
                 DAOFactory.getInstance().getUserDAO().create(user);
@@ -72,6 +77,7 @@ public class RegisterClientCommand extends Command {
         LOG.trace("Insert into DB: user --> " + user);
 
         LOG.debug("Command finished");
-        response.sendRedirect(Path.PAGE_LOGIN);
+        request.getRequestDispatcher(Path.COMMAND_LOGIN).forward(request, response);
+        /*response.sendRedirect(Path.PAGE_LOGIN);*/
     }
 }

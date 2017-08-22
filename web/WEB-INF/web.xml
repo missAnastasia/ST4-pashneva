@@ -72,11 +72,16 @@
         <filter-class>ua.nure.pashneva.SummaryTask4.web.filter.CommandAccessFilter</filter-class>
         <init-param>
             <param-name>admin</param-name>
-            <param-value>getEditUserPageCommand</param-value>
+            <param-value>
+                getEditUserPageCommand
+            </param-value>
         </init-param>
         <init-param>
             <param-name>client</param-name>
-            <param-value>listMenu</param-value>
+            <param-value>
+                listMenu
+                getConditionsPageCommand
+            </param-value>
         </init-param>
         <init-param>
             <param-name>common</param-name>
@@ -142,12 +147,12 @@
 
     <error-page>
         <exception-type>java.lang.Throwable</exception-type>
-        <location>/WEB-INF/jsp/errorView.jsp</location>
+        <location>/message?type=error</location>
     </error-page>
 
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/jsp/errorView.jsp</location>
+        <location>/message?type=error</location>
     </error-page>
 
 </web-app>

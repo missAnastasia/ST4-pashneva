@@ -10,7 +10,7 @@
 
 <body>
 
-<jsp:include page="../jsp/_header.jsp"></jsp:include>
+<jsp:include page="../jsp/_header_client.jsp"></jsp:include>
 <jsp:include page="../jsp/_menu_client.jsp"></jsp:include>
 
 <h3>Delete Product</h3>

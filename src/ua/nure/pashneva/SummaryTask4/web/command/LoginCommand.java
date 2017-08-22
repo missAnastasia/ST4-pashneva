@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import ua.nure.pashneva.SummaryTask4.db.dao.DAOFactory;
 import ua.nure.pashneva.SummaryTask4.db.entity.Role;
 import ua.nure.pashneva.SummaryTask4.db.entity.User;
+import ua.nure.pashneva.SummaryTask4.db.entity.UserStatus;
 import ua.nure.pashneva.SummaryTask4.exception.AppException;
 import ua.nure.pashneva.SummaryTask4.util.SessionManager;
 import ua.nure.pashneva.SummaryTask4.util.Path;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 /**
  * Login command.
@@ -41,59 +43,76 @@ public class LoginCommand extends Command {
 
 		String password = request.getParameter("password");
 		if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
-			throw new AppException("Login/password cannot be empty");
+		    String message = ResourceBundle.getBundle("resources", request.getLocale())
+                    .getString("message.error.empty_fields");
+			throw new AppException(message);
 		}
 
 		User user = null;
 		try {
 			user = DAOFactory.getInstance().getUserDAO().read(login);
 		} catch (Exception e) {
-			throw new AppException("Cannot load data source");
+            String message = ResourceBundle.getBundle("resources", request.getLocale())
+                    .getString("message.error.cannot_load_data_source");
+            throw new AppException(message);
 		}
 		LOG.trace("Found in DB: user --> " + user);
 
-		if (user == null || !password.equals(user.getPassword())) {
-			throw new AppException("Cannot find user with such login/password");
+		if (user == null) {
+            String message = ResourceBundle.getBundle("resources", request.getLocale())
+                    .getString("message.error.cannot_find_user_with_login");
+			throw new AppException(message);
 		}
+
+        if (!password.equals(user.getPassword())) {
+            String message = ResourceBundle.getBundle("resources", request.getLocale())
+                    .getString("message.error.wrong_password");
+            throw new AppException(message);
+        }
 
 		Role userRole = Role.getRole(user);
 		LOG.trace("userRole --> " + userRole);
 
-
-		/*if (userRole == Role.ADMIN) {
-			//forward = Path.COMMAND_LIST_ORDERS;
-			forward = Path.COMMAND_HOME;
+		if (UserStatus.getUserStatus(user).equals(UserStatus.BLOCKED)) {
+			String message = ResourceBundle.getBundle("resources", request.getLocale())
+					.getString("message.error.blocked_account");
+			throw new AppException(message);
 		}
 
-		if (userRole == Role.CLIENT) {
-			//forward = Path.COMMAND_LIST_MENU;
-			forward = Path.COMMAND_HOME;
-		}*/
 
-		SessionManager.storeLoginedUser(session, user, userRole);
-		//session.setAttribute("user", user);
-		LOG.trace("Set the session attribute: user --> " + user);
+        SessionManager.storeLoginedUser(session, user, userRole);
+        //session.setAttribute("user", user);
+        LOG.trace("Set the session attribute: user --> " + user);
 
-		//session.setAttribute("userRole", userRole);
-		LOG.trace("Set the session attribute: userRole --> " + userRole);
+        //session.setAttribute("userRole", userRole);
+        LOG.trace("Set the session attribute: userRole --> " + userRole);
 
-		LOG.info("User " + user + " logged as " + userRole.toString().toLowerCase());
+        LOG.info("User " + user + " logged as " + userRole.toString().toLowerCase());
 
-		String rememberMeStr = request.getParameter("rememberMe");
-		boolean remember= "Y".equals(rememberMeStr);
+        String rememberMeStr = request.getParameter("rememberMe");
+        boolean remember= "Y".equals(rememberMeStr);
 
-		// If user checked "Remember me".
-		if(remember)  {
-			SessionManager.storeUserCookie(response,user);
-		}
+        // If user checked "Remember me".
+        if(remember)  {
+            SessionManager.storeUserCookie(response,user);
+        }
 
 		// Else delete cookie.
 		else  {
-			SessionManager.deleteUserCookie(response);
-		}
+            SessionManager.deleteUserCookie(response);
+        }
 
-		LOG.debug("Command finished");
-		response.sendRedirect(Path.PAGE_HOME);
-	}
+        LOG.debug("Command finished");
+		/*response.sendRedirect(Path.PAGE_HOME);*/
+        if (userRole == Role.ADMIN) {
+
+
+        }
+
+        if (userRole == Role.CLIENT) {
+            //forward = Path.COMMAND_LIST_MENU;
+            response.sendRedirect(Path.COMMAND_CONDITIONS);
+        }
+    }
 
 }

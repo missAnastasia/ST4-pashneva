@@ -7,7 +7,7 @@
 
 <body>
 
-<jsp:include page="WEB-INF/jsp/_header.jsp"/>
+<jsp:include page="WEB-INF/jsp/_header_client.jsp"/>
 <jsp:include page="WEB-INF/jsp/_menu_client.jsp"/>
 
 </div>
@@ -20,12 +20,12 @@
         <form  action="controller?command=loginCommand" autocomplete="on" method="post">
             <h3>
                 <label for="login" class="login"><fmt:message key="login_jsp.label.login"/></label><br>
-                <input id="login" name="login" type="email" placeholder="example@site.com" maxlength="45" required/>
+                <input id="login" name="login" type="email" placeholder="example@site.com" maxlength="45" value="${user.login}" required/>
                 <span class="form__error"><fmt:message key="validation.login"/></span>
             </h3>
             <h3>
                 <label for="password" class="password"><fmt:message key="login_jsp.label.password"/></label><br>
-                <input id="password" name="password" minlength="8" maxlength="45" required type="password" placeholder="Xx1_" pattern="\w+"/>
+                <input id="password" name="password" minlength="8" maxlength="45" type="password" placeholder="Xx1_" pattern="\w+" required/>
                 <span class="form__error"><fmt:message key="validation.password"/></span>
             </h3>
             <h3 class="keeplogin">
