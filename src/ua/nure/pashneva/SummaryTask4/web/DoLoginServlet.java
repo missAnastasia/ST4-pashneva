@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import ua.nure.pashneva.SummaryTask4.db.dao.DAOFactory;
 import ua.nure.pashneva.SummaryTask4.db.entity.User;
-import ua.nure.pashneva.SummaryTask4.util.SessionManager;
+import ua.nure.pashneva.SummaryTask4.web.util.SessionManager;
 
 @WebServlet(urlPatterns = { "/doLogin" })
 public class DoLoginServlet extends HttpServlet {

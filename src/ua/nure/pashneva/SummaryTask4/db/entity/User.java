@@ -7,33 +7,21 @@ public class User {
     private String password;
     private String firstName;
     private String secondName;
-    private int roleId;
-    private int userStatusId;
+    private Role role;
+    private UserStatus userStatus;
 
     public User() {
     }
 
-    public User(int id, String login, String password,
-                String firstName, String secondName,
-                int roleId, int userStatusId) {
-        this.id = id;
-        this.login = login;
-        this.password = password;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.roleId = roleId;
-        this.userStatusId = userStatusId;
-    }
-
     public User(String login, String password,
                 String firstName, String secondName,
-                int roleId, int userStatusId) {
+                Role role, UserStatus userStatus) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
         this.secondName = secondName;
-        this.roleId = roleId;
-        this.userStatusId = userStatusId;
+        this.role = role;
+        this.userStatus = userStatus;
     }
 
     public int getId() {
@@ -76,19 +64,19 @@ public class User {
         this.secondName = secondName;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
-    public int getUserStatusId() {
-        return userStatusId;
+    public UserStatus getUserStatus() {
+        return userStatus;
     }
 
-    public void setUserStatusId(int userStatusId) {
-        this.userStatusId = userStatusId;
+    public void setUserStatus(UserStatus userStatus) {
+        this.userStatus = userStatus;
     }
 }

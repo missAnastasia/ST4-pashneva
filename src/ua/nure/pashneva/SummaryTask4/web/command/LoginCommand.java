@@ -1,13 +1,15 @@
 package ua.nure.pashneva.SummaryTask4.web.command;
 
+import com.octo.captcha.module.servlet.image.SimpleImageCaptchaServlet;
 import org.apache.log4j.Logger;
 import ua.nure.pashneva.SummaryTask4.db.dao.DAOFactory;
 import ua.nure.pashneva.SummaryTask4.db.entity.Role;
 import ua.nure.pashneva.SummaryTask4.db.entity.User;
 import ua.nure.pashneva.SummaryTask4.db.entity.UserStatus;
 import ua.nure.pashneva.SummaryTask4.exception.AppException;
-import ua.nure.pashneva.SummaryTask4.util.SessionManager;
-import ua.nure.pashneva.SummaryTask4.util.Path;
+import ua.nure.pashneva.SummaryTask4.mail.Sender;
+import ua.nure.pashneva.SummaryTask4.web.util.SessionManager;
+import ua.nure.pashneva.SummaryTask4.web.util.Path;
 
 
 import javax.servlet.ServletException;
@@ -15,6 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -70,15 +75,20 @@ public class LoginCommand extends Command {
             throw new AppException(message);
         }
 
-		Role userRole = Role.getRole(user);
+		Role userRole = user.getRole();
 		LOG.trace("userRole --> " + userRole);
 
-		if (UserStatus.getUserStatus(user).equals(UserStatus.BLOCKED)) {
+		if (user.getUserStatus().equals(UserStatus.BLOCKED)) {
 			String message = ResourceBundle.getBundle("resources", request.getLocale())
 					.getString("message.error.blocked_account");
 			throw new AppException(message);
 		}
 
+        /*String userCaptchaResponse = request.getParameter("jcaptcha");
+        boolean captchaPassed = SimpleImageCaptchaServlet.validateResponse(request, userCaptchaResponse);
+        if(!captchaPassed){
+            throw new AppException("Wrong captcha!");
+        }*/
 
         SessionManager.storeLoginedUser(session, user, userRole);
         //session.setAttribute("user", user);
@@ -103,9 +113,22 @@ public class LoginCommand extends Command {
         }
 
         LOG.debug("Command finished");
-		/*response.sendRedirect(Path.PAGE_HOME);*/
-        if (userRole == Role.ADMIN) {
 
+        // Sending email
+        /*Sender sslSender = new Sender("miss.anastasia.1408@gmail.com", "anastasia_main_mail_1408");
+        sslSender.send("This is Subject", "SSL: This is text!", "miss.anastasia.1408@gmail.com", "anastasiia.pashnieva@nure.ua");
+*/
+		/*response.sendRedirect(Path.PAGE_HOME);*/
+
+        /*try {
+            System.out.println(DAOFactory.getInstance().getCarDAO().readAll().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
+
+        if (userRole == Role.ADMIN) {
+            response.sendRedirect(Path.PAGE_HOME);
 
         }
 
@@ -113,6 +136,8 @@ public class LoginCommand extends Command {
             //forward = Path.COMMAND_LIST_MENU;
             response.sendRedirect(Path.COMMAND_CONDITIONS);
         }
+
+
     }
 
 }

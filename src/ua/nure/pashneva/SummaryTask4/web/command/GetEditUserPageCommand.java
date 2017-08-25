@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import ua.nure.pashneva.SummaryTask4.db.entity.Role;
 import ua.nure.pashneva.SummaryTask4.db.entity.UserStatus;
 import ua.nure.pashneva.SummaryTask4.exception.AppException;
-import ua.nure.pashneva.SummaryTask4.util.Path;
+import ua.nure.pashneva.SummaryTask4.web.util.Path;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

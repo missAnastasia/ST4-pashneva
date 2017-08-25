@@ -33,12 +33,18 @@ public class CommandContainer {
 		commands.put("getContactsPageCommand", new GetContactsPageCommand());
 		commands.put("getErrorPageCommand", new GetErrorPageCommand());
 		commands.put("getConditionsPageCommand", new GetConditionsPageCommand());
-		
+		commands.put("getProductsPageCommand", new GetProductsPageCommand());
+		commands.put("updateUserInfoCommand", new UpdateUserInfoCommand());
+		commands.put("getChangeUserDataPageCommand", new GetChangeUserDataPageCommand());
+		commands.put("getChangePasswordPageCommand", new GetChangePasswordPageCommand());
+		commands.put("changePasswordCommand", new ChangePasswordCommand());
+
 		// client commands
 		commands.put("listMenu", new ListMenuCommand());
 		
 		// admin commands
 		commands.put("listOrders", new ListOrdersCommand());
+		commands.put("changeUserStatusCommand", new ChangeUserStatusCommand());
 
 		
 		LOG.debug("Command container was successfully initialized");

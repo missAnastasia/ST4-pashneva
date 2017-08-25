@@ -2,11 +2,13 @@ package ua.nure.pashneva.SummaryTask4.web.filter;
 
 import org.apache.log4j.Logger;
 import ua.nure.pashneva.SummaryTask4.db.entity.Role;
-import ua.nure.pashneva.SummaryTask4.util.Path;
+import ua.nure.pashneva.SummaryTask4.exception.AppException;
+import ua.nure.pashneva.SummaryTask4.web.util.Path;
 
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
@@ -41,12 +43,14 @@ public class CommandAccessFilter implements Filter {
 			chain.doFilter(request, response);
 		} else {
 			String errorMessasge = "You do not have permission to access the requested resource";
-			
-			request.setAttribute("errorMessage", errorMessasge);
-			LOG.trace("Set the request attribute: errorMessage --> " + errorMessasge);
-			
-			request.getRequestDispatcher(Path.PAGE_ERROR_PAGE)
-					.forward(request, response);
+			String message = ResourceBundle.getBundle("resources", request.getLocale())
+					.getString("message.error.no_permissions");
+			/*request.setAttribute("errorMessage", errorMessasge);*/
+			LOG.trace("Set the request attribute: message --> " + message);
+
+			HttpServletResponse httpResponse = (HttpServletResponse) response;
+			httpResponse.sendRedirect(Path.COMMAND_MESSAGE_ERROR + message);
+
 		}
 	}
 	

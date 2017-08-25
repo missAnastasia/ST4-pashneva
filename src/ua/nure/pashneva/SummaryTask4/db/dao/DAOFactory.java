@@ -23,4 +23,5 @@ public abstract class DAOFactory {
 
     public abstract UserDAO getUserDAO();
     public abstract LanguageDAO getLanguageDAO();
+    public abstract CarDAO getCarDAO();
 }

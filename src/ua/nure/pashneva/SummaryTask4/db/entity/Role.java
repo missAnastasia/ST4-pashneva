@@ -3,9 +3,8 @@ package ua.nure.pashneva.SummaryTask4.db.entity;
 public enum Role {
     ADMIN, CLIENT, MANAGER;
 
-    public static Role getRole(User user) {
-        int roleId = user.getRoleId();
-        return Role.values()[roleId - 1];
+    public static Role getRole(int ordinal) {
+        return Role.values()[ordinal - 1];
     }
 
     public static int getRoleOrdinal(String name) {

@@ -16,7 +16,7 @@
         <h2><fmt:message key="login_jsp.h2"/></h2>
     </div>
 
-    <div id="login-div">
+    <div class="login-div">
         <form  action="controller?command=loginCommand" autocomplete="on" method="post">
             <h3>
                 <label for="login" class="login"><fmt:message key="login_jsp.label.login"/></label><br>
@@ -28,6 +28,10 @@
                 <input id="password" name="password" minlength="8" maxlength="45" type="password" placeholder="Xx1_" pattern="\w+" required/>
                 <span class="form__error"><fmt:message key="validation.password"/></span>
             </h3>
+
+               <%-- <img src="jcaptcha.jpg"/> <input type="text" name="jcaptcha" value="" />--%>
+
+
             <h3 class="keeplogin">
                 <input type="checkbox" name="rememberMe" value="Y" id="loginkeeping"/>
                 <label for="loginkeeping"><fmt:message key="login_jsp.label.remember_me"/></label>

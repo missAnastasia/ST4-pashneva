@@ -5,7 +5,7 @@
     <div id="header-wrapper">
         <div id="header" class="container">
             <div id="logo">
-                <h1><a href="controller?command=getHomePageCommand"><fmt:message key="header_jsp.title"/></a></h1>
+                <h1><a href="${pageContext.request.contextPath}/homeView.jsp"><fmt:message key="header_jsp.title"/></a></h1>
                 <p><fmt:message key="header_jsp.car_rental_title"/></p>
             </div>
             <div id="social">
@@ -14,8 +14,8 @@
                 <ul class="menu" >
                     <li><a>${user.firstName} ${user.secondName}</a>
                         <ul class="submenu">
-                            <li><a href="controller?command=userInfoCommand"><fmt:message key="header_jsp.client.orders"/></a></li>
-                            <li><a href="controller?command=getUserInfoPageCommand"><fmt:message key="header_jsp.account"/></a></li>
+                            <li><a href=""><fmt:message key="header_jsp.client.orders"/></a></li>
+                            <li><a href="redirect?command=getUserInfoPageCommand"><fmt:message key="header_jsp.account"/></a></li>
                             <li><a href="controller?command=logoutCommand"><fmt:message key="header_jsp.logout"/></a></li>
                         </ul>
                     </li>
@@ -23,7 +23,7 @@
                     <%--<a class="login-a">${user.firstName} ${user.secondName}</a>--%>
                 </c:when>
                 <c:otherwise>
-                    <a class="login-a" href="controller?command=getLoginPageCommand" rel="nofollow"><fmt:message key="header_jsp.login"/></a>
+                    <a class="login-a" href="${pageContext.request.contextPath}/loginView.jsp" rel="nofollow"><fmt:message key="header_jsp.login"/></a>
                 </c:otherwise>
             </c:choose>
             </div>

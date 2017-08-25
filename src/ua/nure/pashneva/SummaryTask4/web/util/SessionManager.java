@@ -1,4 +1,4 @@
-package ua.nure.pashneva.SummaryTask4.util;
+package ua.nure.pashneva.SummaryTask4.web.util;
 import java.sql.Connection;
 
 import javax.servlet.ServletRequest;

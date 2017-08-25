@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 import ua.nure.pashneva.SummaryTask4.db.dao.DAOFactory;
 import ua.nure.pashneva.SummaryTask4.db.entity.Role;
 import ua.nure.pashneva.SummaryTask4.db.entity.User;
-import ua.nure.pashneva.SummaryTask4.util.SessionManager;
+import ua.nure.pashneva.SummaryTask4.web.util.SessionManager;
 
 public class CookieFilter implements Filter {
 
@@ -72,8 +72,8 @@ public class CookieFilter implements Filter {
                 User user = DAOFactory.getInstance().getUserDAO().read(userName);
 
                 LOG.trace("user --> " + user);
-                LOG.trace("user --> " + Role.getRole(user));
-                SessionManager.storeLoginedUser(session, user, Role.getRole(user));
+                LOG.trace("user --> " + user.getRole());
+                SessionManager.storeLoginedUser(session, user, user.getRole());
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (Exception e) {

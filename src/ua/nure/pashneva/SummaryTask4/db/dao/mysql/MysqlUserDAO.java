@@ -6,6 +6,7 @@ import ua.nure.pashneva.SummaryTask4.db.dao.UserDAO;
 import ua.nure.pashneva.SummaryTask4.db.entity.Language;
 import ua.nure.pashneva.SummaryTask4.db.entity.Role;
 import ua.nure.pashneva.SummaryTask4.db.entity.User;
+import ua.nure.pashneva.SummaryTask4.db.entity.UserStatus;
 import ua.nure.pashneva.SummaryTask4.web.listener.ContextListener;
 
 import java.sql.*;
@@ -17,8 +18,11 @@ public class MysqlUserDAO  implements UserDAO {
     private static final String GET_ALL_USERS = "SELECT * FROM users";
     private static final String GET_USER_BY_ID = "SELECT * FROM users WHERE id=?";
     private static final String GET_USER_BY_LOGIN = "SELECT * FROM users  WHERE login=?";
+    private static final String GET_USER_BY_STATUS = "SELECT * FROM users  WHERE user_status_id=?";
     private static final String ADD_USER = "INSERT INTO users VALUE(DEFAULT, ?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE_USER_BY_ID = "UPDATE users SET login=?, password=?, first_name=?, second_name=?, role_id=?, user_status_id=? WHERE id=?";
+    private static final String UPDATE_USER_BY_ID = "UPDATE users SET login=?, first_name=?, second_name=? WHERE id=?";
+    private static final String UPDATE_USER_PASSWORD_BY_ID = "UPDATE users SET password=? WHERE id=?";
+    private static final String UPDATE_USER_STATUS_BY_ID = "UPDATE users SET user_status_id=? WHERE id=?";
     private static final String DELETE_USER_BY_ID = "DELETE FROM users WHERE id=?";
 
     private static final String ENTITY_ID = "id";
@@ -43,8 +47,8 @@ public class MysqlUserDAO  implements UserDAO {
             statement.setString(k++, user.getPassword());
             statement.setString(k++, user.getFirstName());
             statement.setString(k++, user.getSecondName());
-            statement.setInt(k++, user.getRoleId());
-            statement.setInt(k++, user.getUserStatusId());
+            statement.setInt(k++, Role.getRoleOrdinal(user.getRole()));
+            statement.setInt(k++, UserStatus.getUserStatusOrdinal(user.getUserStatus()));
 
             if (statement.executeUpdate() > 0) {
                 generatedKeys = statement.getGeneratedKeys();
@@ -117,6 +121,34 @@ public class MysqlUserDAO  implements UserDAO {
     }
 
     @Override
+    public List<User> read(UserStatus userStatus) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        List<User> users = new ArrayList<>();
+
+        try {
+            connection = DBConnection.getInstance().getConnection();
+            statement = connection.prepareStatement(GET_USER_BY_STATUS);
+
+            int k = 1;
+            statement.setInt(k++, UserStatus.getUserStatusOrdinal(userStatus));
+
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                User user = extractUser(resultSet);
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            System.err.println(e.toString());
+        } finally {
+            DBConnection.getInstance().close(connection, statement, resultSet);
+        }
+        return users;
+    }
+
+    @Override
     public List<User> readAll() {
         Connection connection = null;
         Statement statement = null;
@@ -151,11 +183,56 @@ public class MysqlUserDAO  implements UserDAO {
 
             int k = 1;
             statement.setString(k++, user.getLogin());
-            statement.setString(k++, user.getPassword());
             statement.setString(k++, user.getFirstName());
             statement.setString(k++, user.getSecondName());
-            statement.setInt(k++, user.getRoleId());
-            statement.setInt(k++, user.getUserStatusId());
+            statement.setInt(k++, user.getId());
+
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.toString());
+            return false;
+        } finally {
+            DBConnection.getInstance().close(connection, statement);
+        }
+    }
+
+    @Override
+    public boolean updatePassword(User user) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = DBConnection.getInstance().getConnection();
+            statement = connection.prepareStatement(UPDATE_USER_PASSWORD_BY_ID);
+
+            int k = 1;
+
+            statement.setString(k++, user.getPassword());
+            statement.setInt(k++, user.getId());
+
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.toString());
+            return false;
+        } finally {
+            DBConnection.getInstance().close(connection, statement);
+        }
+    }
+
+    @Override
+    public boolean updateStatus(User user) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = DBConnection.getInstance().getConnection();
+            statement = connection.prepareStatement(UPDATE_USER_STATUS_BY_ID);
+
+            int k = 1;
+
+            statement.setInt(k++, UserStatus.getUserStatusOrdinal(user.getUserStatus()));
             statement.setInt(k++, user.getId());
 
             statement.executeUpdate();
@@ -198,8 +275,8 @@ public class MysqlUserDAO  implements UserDAO {
             user.setPassword(resultSet.getString(USER_PASSWORD));
             user.setFirstName(resultSet.getString(USER_FIRST_NAME));
             user.setSecondName(resultSet.getString(USER_SECOND_NAME));
-            user.setRoleId(resultSet.getInt(USER_ROLE_ID));
-            user.setUserStatusId(resultSet.getInt(USER_STATUS_ID));
+            user.setRole(Role.getRole(resultSet.getInt(USER_ROLE_ID)));
+            user.setUserStatus(UserStatus.getUserStatus(resultSet.getInt(USER_STATUS_ID)));
         } catch (Exception e) {
             System.err.println(e.toString());
         }

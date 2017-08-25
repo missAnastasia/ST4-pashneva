@@ -14,8 +14,8 @@
 <%@ include file="/WEB-INF/jspf/head_main.jspf" %>
 
 <body>
-<jsp:include page="_header_client.jsp"></jsp:include>
-<jsp:include page="_menu_client.jsp"></jsp:include>
+<jsp:include page="_header_client.jsp"/>
+<jsp:include page="_menu_client.jsp"/>
 
 </div>
 <div id="page" class="container">
@@ -59,6 +59,6 @@
 
     </table>
 </div>
-<jsp:include page="_footer.jsp"></jsp:include>
+<jsp:include page="_footer.jsp"/>
 </body>
 </html>

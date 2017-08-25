@@ -18,14 +18,23 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>MessageController</servlet-name>
-        <servlet-class>ua.nure.pashneva.SummaryTask4.web.MessageController</servlet-class>
+        <servlet-name>RedirectController</servlet-name>
+        <servlet-class>ua.nure.pashneva.SummaryTask4.web.RedirectController</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>MessageController</servlet-name>
-        <url-pattern>/message</url-pattern>
+        <servlet-name>RedirectController</servlet-name>
+        <url-pattern>/redirect</url-pattern>
     </servlet-mapping>
+
+    <!--<servlet>
+        <servlet-name>jcaptcha</servlet-name>
+        <servlet-class>com.octo.captcha.module.servlet.image.SimpleImageCaptchaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>jcaptcha</servlet-name>
+        <url-pattern>/jcaptcha.jpg</url-pattern>
+    </servlet-mapping>-->
 
     <filter>
     <filter-name>JDBCFilter</filter-name>
@@ -74,6 +83,7 @@
             <param-name>admin</param-name>
             <param-value>
                 getEditUserPageCommand
+                changeUserStatusCommand
             </param-value>
         </init-param>
         <init-param>
@@ -81,6 +91,7 @@
             <param-value>
                 listMenu
                 getConditionsPageCommand
+                getProductsPageCommand
             </param-value>
         </init-param>
         <init-param>
@@ -89,6 +100,10 @@
                 logoutCommand
                 noCommand
                 getUserInfoPageCommand
+                updateUserInfoCommand
+                getChangeUserDataPageCommand
+                getChangePasswordPageCommand
+                changePasswordCommand
             </param-value>
         </init-param>
         <init-param>
@@ -103,6 +118,7 @@
                 registerClientCommand
                 getContactsPageCommand
                 getErrorPageCommand
+
             </param-value>
         </init-param>
     </filter>
@@ -147,12 +163,12 @@
 
     <error-page>
         <exception-type>java.lang.Throwable</exception-type>
-        <location>/message?type=error</location>
+        <location>/controller?command=getErrorPageCommand</location>
     </error-page>
 
     <error-page>
         <error-code>404</error-code>
-        <location>/message?type=error</location>
+        <location>/controller?command=getErrorPageCommand</location>
     </error-page>
 
 </web-app>

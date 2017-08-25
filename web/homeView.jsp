@@ -12,6 +12,12 @@
 
 </div>
 <div id="page" class="container">
+    <div class="title">
+        <h2><fmt:message key="page_title.home"/></h2>
+    </div>
+    <div id="about_p">
+        <p><fmt:message key="about_jsp.p"></fmt:message></p>
+    </div>
     <div class="column1">
         <div class="title">
             <h2><fmt:message key="homeView_jsp.container.column1.h"/></h2>

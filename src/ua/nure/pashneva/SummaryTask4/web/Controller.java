@@ -2,7 +2,7 @@ package ua.nure.pashneva.SummaryTask4.web;
 
 import org.apache.log4j.Logger;
 import ua.nure.pashneva.SummaryTask4.exception.AppException;
-import ua.nure.pashneva.SummaryTask4.util.Path;
+import ua.nure.pashneva.SummaryTask4.web.util.Path;
 import ua.nure.pashneva.SummaryTask4.web.command.Command;
 import ua.nure.pashneva.SummaryTask4.web.command.CommandContainer;
 

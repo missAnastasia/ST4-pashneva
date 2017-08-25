@@ -2,20 +2,16 @@ package ua.nure.pashneva.SummaryTask4.web.command;
 
 import org.apache.log4j.Logger;
 import ua.nure.pashneva.SummaryTask4.db.dao.DAOFactory;
-import ua.nure.pashneva.SummaryTask4.db.entity.Language;
 import ua.nure.pashneva.SummaryTask4.db.entity.Role;
 import ua.nure.pashneva.SummaryTask4.db.entity.User;
 import ua.nure.pashneva.SummaryTask4.db.entity.UserStatus;
 import ua.nure.pashneva.SummaryTask4.exception.AppException;
-import ua.nure.pashneva.SummaryTask4.util.Path;
-import ua.nure.pashneva.SummaryTask4.util.SessionManager;
+import ua.nure.pashneva.SummaryTask4.web.util.Path;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class RegisterClientCommand extends Command {
@@ -55,7 +51,7 @@ public class RegisterClientCommand extends Command {
         }
 
         User user = new User(login, password, firstName, secondName,
-                Role.getRoleOrdinal(Role.CLIENT), UserStatus.getUserStatusOrdinal(UserStatus.UNBLOCKED));
+                Role.CLIENT, UserStatus.UNBLOCKED);
 
         try {
             User existingUser = DAOFactory.getInstance().getUserDAO().read(user.getLogin());

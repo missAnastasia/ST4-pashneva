@@ -5,7 +5,7 @@
     <div id="header-wrapper">
         <div id="header" class="container">
             <div id="logo">
-                <h1><a href="controller?command=getHomePageCommand"><fmt:message key="header_jsp.title"/></a></h1>
+                <h1><a href="${pageContext.request.contextPath}/homeView.jsp"><fmt:message key="header_jsp.title"/></a></h1>
                 <p><fmt:message key="header_jsp.car_rental_title"/></p>
             </div>
             <div id="social">
@@ -21,7 +21,7 @@
                         </ul>
                     </c:when>
                     <c:otherwise>
-                        <a class="login-a" href="controller?command=getLoginPageCommand" rel="nofollow"><fmt:message key="header_jsp.login"/></a>
+                        <a class="login-a" href="${pageContext.request.contextPath}/loginView.jsp" rel="nofollow"><fmt:message key="header_jsp.login"/></a>
                     </c:otherwise>
                 </c:choose>
             </div>

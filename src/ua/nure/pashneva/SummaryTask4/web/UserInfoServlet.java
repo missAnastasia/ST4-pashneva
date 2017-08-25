@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import ua.nure.pashneva.SummaryTask4.db.entity.User;
-import ua.nure.pashneva.SummaryTask4.util.SessionManager;
+import ua.nure.pashneva.SummaryTask4.web.util.SessionManager;
 
 @WebServlet(urlPatterns = { "/userInfo" })
 public class UserInfoServlet extends HttpServlet {
@@ -43,8 +43,8 @@ public class UserInfoServlet extends HttpServlet {
         request.setAttribute("user", loginedUser);
 
 
-        // Logined, forward to /WEB-INF/views/userInfoView.jsp
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/view/userInfoView.jsp");
+        // Logined, forward to /WEB-INF/views/changeUserDataView.jsp
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/view/changeUserDataView.jsp");
         dispatcher.forward(request, response);
 
     }

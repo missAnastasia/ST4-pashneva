@@ -16,7 +16,7 @@
         <h2><fmt:message key="register_jsp.h2"/></h2>
     </div>
 
-    <div id="login-div">
+    <div class="login-div">
         <form  action="controller?command=registerClientCommand" autocomplete="on" method="post">
             <h3>
                 <label for="first_name" class="first_name"><fmt:message key="register_jsp.label.first_name"/></label><br>

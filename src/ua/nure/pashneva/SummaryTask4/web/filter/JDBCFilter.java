@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import ua.nure.pashneva.SummaryTask4.db.DBConnection;
 import ua.nure.pashneva.SummaryTask4.db.dao.DAOFactory;
-import ua.nure.pashneva.SummaryTask4.util.SessionManager;
+import ua.nure.pashneva.SummaryTask4.web.util.SessionManager;
 
 public class JDBCFilter implements Filter {
 

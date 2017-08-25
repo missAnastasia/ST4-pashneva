@@ -1,11 +1,9 @@
 package ua.nure.pashneva.SummaryTask4.web.command;
 
 import org.apache.log4j.Logger;
-import ua.nure.pashneva.SummaryTask4.exception.AppException;
-import ua.nure.pashneva.SummaryTask4.util.Path;
+import ua.nure.pashneva.SummaryTask4.web.util.Path;
 
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
