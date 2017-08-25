@@ -128,7 +128,7 @@ public class LoginCommand extends Command {
 
 
         if (userRole == Role.ADMIN) {
-            response.sendRedirect(Path.PAGE_HOME);
+            response.sendRedirect(Path.COMMAND_ADMIN_USER_ACCOUNTS);
 
         }
 

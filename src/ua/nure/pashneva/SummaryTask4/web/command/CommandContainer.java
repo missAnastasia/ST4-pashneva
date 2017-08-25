@@ -45,6 +45,7 @@ public class CommandContainer {
 		// admin commands
 		commands.put("listOrders", new ListOrdersCommand());
 		commands.put("changeUserStatusCommand", new ChangeUserStatusCommand());
+		commands.put("getUserAccountsPageCommand", new GetUserAccountsPageCommand());
 
 		
 		LOG.debug("Command container was successfully initialized");

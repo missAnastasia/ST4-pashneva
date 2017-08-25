@@ -17,44 +17,41 @@
     </div>
 
     <div class="login-div" id="user-info-div">
-        <div class="one-position-info-div">
-            <label class="label-n">
-                <fmt:message key="userInfo_jsp.label.first_name"/>
-            </label>
-            <label class="label-v">${user.firstName}</label>
+        <div id="position-info-div">
+            <div class="one-position-info-div">
+                <label class="label-n">
+                    <fmt:message key="userInfo_jsp.label.first_name"/>
+                </label>
+                <label class="label-v">${user.firstName}</label>
+            </div>
+
+            <div class="one-position-info-div">
+                <label class="label-n">
+                    <fmt:message key="userInfo_jsp.label.second_name"/>
+                </label>
+                <label class="label-v">${user.secondName}</label>
+            </div>
+
+            <div class="one-position-info-div">
+                <label class="label-n">
+                    <fmt:message key="userInfo_jsp.label.login"/>
+                </label>
+                <label class="label-v">${user.login}</label>
+            </div>
         </div>
 
-        <div class="one-position-info-div">
-            <label class="label-n">
-            <fmt:message key="userInfo_jsp.label.second_name"/>
-        </label>
-            <label class="label-v">${user.secondName}</label>
+        <div id="change-div">
+            <div class="change-a">
+                <a href="${pageContext.request.contextPath}/redirect?command=getChangeUserDataPageCommand">
+                    <fmt:message key="userInfo_jsp.link.change_data"/>
+                </a>
+            </div>
+            <div class="change-a">
+                <a href="${pageContext.request.contextPath}/redirect?command=getChangePasswordPageCommand">
+                    <fmt:message key="userInfo_jsp.link.change_password"/>
+                </a>
+            </div>
         </div>
-
-        <div class="one-position-info-div">
-            <label class="label-n">
-                <fmt:message key="userInfo_jsp.label.login"/>
-            </label>
-            <label class="label-v">${user.login}</label>
-        </div>
-
-        <div class="change-a">
-            <a href="${pageContext.request.contextPath}/redirect?command=getChangeUserDataPageCommand">
-                <fmt:message key="userInfo_jsp.link.change_data"/>
-            </a>
-        </div>
-        <div class="change-a">
-            <a href="${pageContext.request.contextPath}/redirect?command=getChangePasswordPageCommand">
-                <fmt:message key="userInfo_jsp.link.change_password"/>
-            </a>
-         </div>
-
-
-
-            <%--<p class="change_link">
-                <fmt:message key="register_jsp.label.already_have_account"/>
-                <a href="controller?command=getLoginPageCommand" class="to_register"><fmt:message key="register_jsp.log_in"/></a>
-            </p>--%>
 
     </div>
 </div>

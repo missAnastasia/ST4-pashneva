@@ -84,6 +84,7 @@
             <param-value>
                 getEditUserPageCommand
                 changeUserStatusCommand
+                getUserAccountsPageCommand
             </param-value>
         </init-param>
         <init-param>

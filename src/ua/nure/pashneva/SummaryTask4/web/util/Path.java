@@ -10,6 +10,7 @@ public class Path {
     public static final String PAGE_ERROR_PAGE = "/WEB-INF/jsp/errorView.jsp";
     public static final String PAGE_LIST_MENU = "/WEB-INF/jsp/client/list_menu.jsp";
     public static final String PAGE_LIST_ORDERS = "/WEB-INF/jsp/admin/list_orders.jsp";
+    public static final String PAGE_ADMIN_USER_ACCOUNTS = "/WEB-INF/jsp/admin/userAccountsView.jsp";
     public static final String PAGE_USER_INFO = "/WEB-INF/jsp/userInfoView.jsp";
     public static final String PAGE_CHANGE_USER_DATA = "/WEB-INF/jsp/changeUserDataView.jsp";
     public static final String PAGE_CHANGE_PASSWORD = "/WEB-INF/jsp/changePasswordView.jsp";
@@ -27,6 +28,7 @@ public class Path {
     public static final String COMMAND_USER_INFO = "redirect?command=getUserInfoPageCommand";
     public static final String COMMAND_CONDITIONS = "/redirect?command=getConditionsPageCommand";
     public static final String COMMAND_PRODUCTS = "/controller?command=getProductsPageCommand";
+    public static final String COMMAND_ADMIN_USER_ACCOUNTS = "/redirect?command=getUserAccountsPageCommand";
     /*public static final String COMMAND_HOME = "controller?command=getHomePageCommand";*/
 
     public static final String COMMAND_MESSAGE_SUCCESS = "controller?command=getSuccessPageCommand&message=";
