@@ -12,10 +12,9 @@ import ua.nure.pashneva.SummaryTask4.db.entity.User;
 
 public class SessionManager {
 
-    public static final String ATT_NAME_CONNECTION = "ATTRIBUTE_FOR_CONNECTION";
+    public static final String ATT_NAME_CONNECTION = "connection";
 
-    private static final String ATT_NAME_USER_NAME = "ATTRIBUTE_FOR_STORE_USER_NAME_IN_COOKIE";
-
+    private static final String ATT_NAME_USER_NAME = "user_login";
 
     // Store Connection in request attribute.
     // (Information stored only exist during requests)
@@ -44,6 +43,14 @@ public class SessionManager {
         return loginedUser;
     }
 
+    public static void storeUserToConfirmRegistration(HttpSession session, User userToConfirm) {
+        session.setAttribute("userToConfirm", userToConfirm);
+    }
+
+    public static User getUserToConfirmRegistration(HttpSession session) {
+        User userToConfirm = (User) session.getAttribute("userToConfirm");
+        return userToConfirm;
+    }
 
     // Store info in Cookie
     public static void storeUserCookie(HttpServletResponse response, User user) {

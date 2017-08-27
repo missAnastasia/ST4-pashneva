@@ -5,7 +5,7 @@
                        http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID" version="3.0">
 
-    <display-name>SimpleWebApp</display-name>
+    <display-name>ST4</display-name>
 
     <servlet>
         <servlet-name>Controller</servlet-name>
@@ -105,6 +105,7 @@
                 getChangeUserDataPageCommand
                 getChangePasswordPageCommand
                 changePasswordCommand
+
             </param-value>
         </init-param>
         <init-param>
@@ -118,8 +119,10 @@
                 getRegisterClientPageCommand
                 registerClientCommand
                 getContactsPageCommand
-                getErrorPageCommand
-
+                getErrorMessagePageCommand
+                getSuccessMessagePageCommand
+                confirmRegistrationCommand
+                getSuccessMessagePageCommand
             </param-value>
         </init-param>
     </filter>
@@ -157,6 +160,15 @@
         <param-name>locales</param-name>
         <param-value>/WEB-INF/locales.properties</param-value>
     </context-param>
+    <context-param>
+        <param-name>mail_server_properties</param-name>
+        <param-value>/WEB-INF/mail-properties/gmail/ssl/ssl_gmail.properties</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mail_senders_properties</param-name>
+        <param-value>/WEB-INF/mail-properties/gmail/gmail_senders.properties</param-value>
+    </context-param>
+
 
     <listener>
         <listener-class>ua.nure.pashneva.SummaryTask4.web.listener.ContextListener</listener-class>
@@ -164,12 +176,12 @@
 
     <error-page>
         <exception-type>java.lang.Throwable</exception-type>
-        <location>/controller?command=getErrorPageCommand</location>
+        <location>/controller?command=getErrorMessagePageCommand</location>
     </error-page>
 
     <error-page>
         <error-code>404</error-code>
-        <location>/controller?command=getErrorPageCommand</location>
+        <location>/controller?command=getErrorMessagePageCommand</location>
     </error-page>
 
 </web-app>

@@ -1,13 +1,11 @@
 package ua.nure.pashneva.SummaryTask4.web.command;
 
-import com.octo.captcha.module.servlet.image.SimpleImageCaptchaServlet;
 import org.apache.log4j.Logger;
 import ua.nure.pashneva.SummaryTask4.db.dao.DAOFactory;
 import ua.nure.pashneva.SummaryTask4.db.entity.Role;
 import ua.nure.pashneva.SummaryTask4.db.entity.User;
 import ua.nure.pashneva.SummaryTask4.db.entity.UserStatus;
 import ua.nure.pashneva.SummaryTask4.exception.AppException;
-import ua.nure.pashneva.SummaryTask4.mail.Sender;
 import ua.nure.pashneva.SummaryTask4.web.util.SessionManager;
 import ua.nure.pashneva.SummaryTask4.web.util.Path;
 
@@ -17,9 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -115,8 +110,8 @@ public class LoginCommand extends Command {
         LOG.debug("Command finished");
 
         // Sending email
-        /*Sender sslSender = new Sender("miss.anastasia.1408@gmail.com", "anastasia_main_mail_1408");
-        sslSender.send("This is Subject", "SSL: This is text!", "miss.anastasia.1408@gmail.com", "anastasiia.pashnieva@nure.ua");
+        /*Sender sslSender = new Sender("miss.anastasia.1408@properties.com", "anastasia_main_mail_1408");
+        sslSender.send("This is Subject", "SSL: This is text!", "miss.anastasia.1408@properties.com", "anastasiia.pashnieva@nure.ua");
 */
 		/*response.sendRedirect(Path.PAGE_HOME);*/
 

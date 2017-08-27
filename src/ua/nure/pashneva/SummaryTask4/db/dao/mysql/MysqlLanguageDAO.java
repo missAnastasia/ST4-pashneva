@@ -3,6 +3,7 @@ package ua.nure.pashneva.SummaryTask4.db.dao.mysql;
 import ua.nure.pashneva.SummaryTask4.db.DBConnection;
 import ua.nure.pashneva.SummaryTask4.db.dao.LanguageDAO;
 import ua.nure.pashneva.SummaryTask4.db.entity.Language;
+import ua.nure.pashneva.SummaryTask4.exception.DBException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -22,17 +23,17 @@ public class MysqlLanguageDAO implements LanguageDAO {
     private static final String LANG_PREFIX = "prefix";
 
     @Override
-    public boolean create(Language language) {
+    public boolean create(Language language)  throws DBException {
         return false;
     }
 
     @Override
-    public Language read(Integer id) {
+    public Language read(Integer id)  throws DBException {
         return null;
     }
 
     @Override
-    public Language read(String name) {
+    public Language read(String name) throws DBException {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -50,8 +51,7 @@ public class MysqlLanguageDAO implements LanguageDAO {
                 language = extractLanguage(resultSet);
             }
         } catch (Exception e) {
-            System.err.println(e.toString());
-            return null;
+            throw new DBException(e.getMessage(), e);
         } finally {
             DBConnection.getInstance().close(connection, statement, resultSet);
         }
@@ -59,7 +59,7 @@ public class MysqlLanguageDAO implements LanguageDAO {
     }
 
     @Override
-    public List<Language> readAll() {
+    public List<Language> readAll() throws DBException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -75,7 +75,7 @@ public class MysqlLanguageDAO implements LanguageDAO {
                 languages.add(language);
             }
         } catch (SQLException e) {
-            System.err.println(e.toString());
+            throw new DBException(e.getMessage(), e);
         } finally {
             DBConnection.getInstance().close(connection, statement, resultSet);
         }
@@ -92,11 +92,15 @@ public class MysqlLanguageDAO implements LanguageDAO {
         return false;
     }
 
-    private Language extractLanguage(ResultSet resultSet) throws SQLException {
+    private Language extractLanguage(ResultSet resultSet) throws DBException {
         Language language = new Language();
-        language.setId(resultSet.getInt(ENTITY_ID));
-        language.setName(resultSet.getString(LANG_NAME));
-        language.setPrefix(resultSet.getString(LANG_PREFIX));
+        try {
+            language.setId(resultSet.getInt(ENTITY_ID));
+            language.setName(resultSet.getString(LANG_NAME));
+            language.setPrefix(resultSet.getString(LANG_PREFIX));
+        } catch (SQLException e) {
+            throw new DBException(e.getMessage(), e);
+        }
         return language;
     }
 }

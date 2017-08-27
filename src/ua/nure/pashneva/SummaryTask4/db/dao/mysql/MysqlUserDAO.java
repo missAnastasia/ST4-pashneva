@@ -7,6 +7,7 @@ import ua.nure.pashneva.SummaryTask4.db.entity.Language;
 import ua.nure.pashneva.SummaryTask4.db.entity.Role;
 import ua.nure.pashneva.SummaryTask4.db.entity.User;
 import ua.nure.pashneva.SummaryTask4.db.entity.UserStatus;
+import ua.nure.pashneva.SummaryTask4.exception.DBException;
 import ua.nure.pashneva.SummaryTask4.web.listener.ContextListener;
 
 import java.sql.*;
@@ -34,7 +35,7 @@ public class MysqlUserDAO  implements UserDAO {
     private static final String USER_STATUS_ID = "user_status_id";
 
     @Override
-    public boolean create(User user) {
+    public boolean create(User user) throws DBException {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet generatedKeys = null;
@@ -59,15 +60,14 @@ public class MysqlUserDAO  implements UserDAO {
             }
             return false;
         } catch (SQLException e) {
-            System.err.println(e.toString());
-            return false;
+            throw new DBException(e.getMessage(), e);
         } finally {
             DBConnection.getInstance().close(connection, statement, generatedKeys);
         }
     }
 
     @Override
-    public User read(Integer id) {
+    public User read(Integer id) throws DBException {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -86,7 +86,7 @@ public class MysqlUserDAO  implements UserDAO {
                 user = extractUser(resultSet);
             }
         } catch (SQLException e) {
-            System.err.println(e.toString());
+            throw new DBException(e.getMessage(), e);
         } finally {
             DBConnection.getInstance().close(connection, statement, resultSet);
         }
@@ -94,7 +94,7 @@ public class MysqlUserDAO  implements UserDAO {
     }
 
     @Override
-    public User read(String login) {
+    public User read(String login) throws DBException {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -113,7 +113,7 @@ public class MysqlUserDAO  implements UserDAO {
                 user = extractUser(resultSet);
             }
         } catch (SQLException e) {
-            System.err.println(e.toString());
+            throw new DBException(e.getMessage(), e);
         } finally {
             DBConnection.getInstance().close(connection, statement, resultSet);
         }
@@ -121,7 +121,7 @@ public class MysqlUserDAO  implements UserDAO {
     }
 
     @Override
-    public List<User> read(UserStatus userStatus) {
+    public List<User> read(UserStatus userStatus) throws DBException {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -141,7 +141,7 @@ public class MysqlUserDAO  implements UserDAO {
                 users.add(user);
             }
         } catch (SQLException e) {
-            System.err.println(e.toString());
+            throw new DBException(e.getMessage(), e);
         } finally {
             DBConnection.getInstance().close(connection, statement, resultSet);
         }
@@ -149,7 +149,7 @@ public class MysqlUserDAO  implements UserDAO {
     }
 
     @Override
-    public List<User> readAll() {
+    public List<User> readAll() throws DBException {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -165,7 +165,7 @@ public class MysqlUserDAO  implements UserDAO {
                 users.add(user);
             }
         } catch (SQLException e) {
-            System.err.println(e.toString());
+            throw new DBException(e.getMessage(), e);
         } finally {
             DBConnection.getInstance().close(connection, statement, resultSet);
         }
@@ -173,7 +173,7 @@ public class MysqlUserDAO  implements UserDAO {
     }
 
     @Override
-    public boolean update(User user) {
+    public boolean update(User user) throws DBException {
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -190,15 +190,14 @@ public class MysqlUserDAO  implements UserDAO {
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            System.err.println(e.toString());
-            return false;
+            throw new DBException(e.getMessage(), e);
         } finally {
             DBConnection.getInstance().close(connection, statement);
         }
     }
 
     @Override
-    public boolean updatePassword(User user) {
+    public boolean updatePassword(User user) throws DBException {
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -214,15 +213,14 @@ public class MysqlUserDAO  implements UserDAO {
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            System.err.println(e.toString());
-            return false;
+            throw new DBException(e.getMessage(), e);
         } finally {
             DBConnection.getInstance().close(connection, statement);
         }
     }
 
     @Override
-    public boolean updateStatus(User user) {
+    public boolean updateStatus(User user) throws DBException {
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -238,15 +236,14 @@ public class MysqlUserDAO  implements UserDAO {
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            System.err.println(e.toString());
-            return false;
+            throw new DBException(e.getMessage(), e);
         } finally {
             DBConnection.getInstance().close(connection, statement);
         }
     }
 
     @Override
-    public boolean delete(User user) {
+    public boolean delete(User user) throws DBException {
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -260,14 +257,13 @@ public class MysqlUserDAO  implements UserDAO {
             statement.executeUpdate();
             return true;
         } catch (Exception e) {
-            System.err.println(e.toString());
-            return false;
+            throw new DBException(e.getMessage(), e);
         } finally {
             DBConnection.getInstance().close(connection, statement);
         }
     }
 
-    private User extractUser(ResultSet resultSet) {
+    private User extractUser(ResultSet resultSet) throws DBException {
         User user = new User();
         try {
             user.setId(resultSet.getInt(ENTITY_ID));
@@ -278,7 +274,7 @@ public class MysqlUserDAO  implements UserDAO {
             user.setRole(Role.getRole(resultSet.getInt(USER_ROLE_ID)));
             user.setUserStatus(UserStatus.getUserStatus(resultSet.getInt(USER_STATUS_ID)));
         } catch (Exception e) {
-            System.err.println(e.toString());
+            throw new DBException(e.getMessage(), e);
         }
         return user;
     }

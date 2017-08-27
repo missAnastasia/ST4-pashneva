@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class GetErrorPageCommand extends Command {
+public class GetErrorMessagePageCommand extends Command {
 
-    private static final Logger LOG = Logger.getLogger(GetErrorPageCommand.class);
+    private static final Logger LOG = Logger.getLogger(GetErrorMessagePageCommand.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {

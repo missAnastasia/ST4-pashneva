@@ -6,7 +6,9 @@ import ua.nure.pashneva.SummaryTask4.db.entity.Role;
 import ua.nure.pashneva.SummaryTask4.db.entity.User;
 import ua.nure.pashneva.SummaryTask4.db.entity.UserStatus;
 import ua.nure.pashneva.SummaryTask4.exception.AppException;
+import ua.nure.pashneva.SummaryTask4.mail.MailManager;
 import ua.nure.pashneva.SummaryTask4.web.util.Path;
+import ua.nure.pashneva.SummaryTask4.web.util.SessionManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +53,7 @@ public class RegisterClientCommand extends Command {
         }
 
         User user = new User(login, password, firstName, secondName,
-                Role.CLIENT, UserStatus.UNBLOCKED);
+                Role.CLIENT, UserStatus.BLOCKED);
 
         try {
             User existingUser = DAOFactory.getInstance().getUserDAO().read(user.getLogin());
@@ -63,17 +65,24 @@ public class RegisterClientCommand extends Command {
                 throw new AppException(message);
             } else {
                 LOG.debug("existingUser != null --> false");
-                DAOFactory.getInstance().getUserDAO().create(user);
+                /*DAOFactory.getInstance().getUserDAO().create(user);*/
+                SessionManager.storeUserToConfirmRegistration(request.getSession(), user);
             }
         } catch (Exception e) {
             LOG.debug("catch section");
             throw new AppException(e.getMessage());
         }
 
-        LOG.trace("Insert into DB: user --> " + user);
+        /*LOG.trace("Insert into DB: user --> " + user);*/
+        LOG.trace("Stored into session: user --> " + user);
+
+        LOG.debug("Sending email to --> " + login);
+
+        MailManager.sendRegistrationConfirmationMail(login, request);
 
         LOG.debug("Command finished");
-        request.getRequestDispatcher(Path.COMMAND_LOGIN).forward(request, response);
-        /*response.sendRedirect(Path.PAGE_LOGIN);*/
+        response.sendRedirect(Path.COMMAND_MESSAGE_SUCCESS +
+                ResourceBundle.getBundle("resources", request.getLocale())
+                        .getString("message.success.confirm_registration"));
     }
 }

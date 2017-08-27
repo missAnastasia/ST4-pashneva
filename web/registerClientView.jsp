@@ -30,17 +30,13 @@
             </h3>
             <h3>
                 <label for="login" class="login"><fmt:message key="register_jsp.label.login"/></label><br>
-                <input id="login" name="login" type="email" placeholder="example@site.com" minlength="8" maxlength="45" required/>
+                <input id="login" name="login" type="email" placeholder="example@site.com" maxlength="256" required/>
                 <span class="form__error"><fmt:message key="validation.login"/></span>
             </h3>
             <h3>
                 <label for="password" class="password"><fmt:message key="register_jsp.label.password"/></label><br>
                 <input id="password" name="password" minlength="8" maxlength="45" required type="password" placeholder="Xx1_" pattern="\w+"/>
                 <span class="form__error"><fmt:message key="validation.password"/></span>
-            </h3>
-            <h3 class="keeplogin">
-                <input type="checkbox" name="rememberMe" value="Y" id="loginkeeping"/>
-                <label for="loginkeeping"><fmt:message key="login_jsp.label.remember_me"/></label>
             </h3>
             <input type="submit" value="<fmt:message key="register_jsp.sign_in"/>"/>
 

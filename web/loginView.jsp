@@ -20,7 +20,7 @@
         <form  action="controller?command=loginCommand" autocomplete="on" method="post">
             <h3>
                 <label for="login" class="login"><fmt:message key="login_jsp.label.login"/></label><br>
-                <input id="login" name="login" type="email" placeholder="example@site.com" maxlength="45" value="${user.login}" required/>
+                <input id="login" name="login" type="email" placeholder="example@site.com" maxlength="256" value="${user.login}" required/>
                 <span class="form__error"><fmt:message key="validation.login"/></span>
             </h3>
             <h3>

@@ -2,6 +2,7 @@ package ua.nure.pashneva.SummaryTask4.web.listener;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import ua.nure.pashneva.SummaryTask4.mail.MailManager;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -33,6 +34,7 @@ public class ContextListener implements ServletContextListener {
 		initLog4J(servletContext);
 		initCommandContainer();
 		initLocalization(servletContext);
+        initMailProperties(servletContext);
 	
 		log("Servlet context initialization finished");
 	}
@@ -78,13 +80,41 @@ public class ContextListener implements ServletContextListener {
         try {
             locales.load(new FileInputStream(localesFileRealPath));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Cannot load locales properties");
         }
 
         // save descriptions to servlet context
         servletContext.setAttribute("locales", locales);
 	}
-	
+
+    private void initMailProperties(ServletContext servletContext) {
+        String mailServerPropertiesFileName = servletContext.getInitParameter("mail_server_properties");
+        String mailSendersPropertiesFileName = servletContext.getInitParameter("mail_senders_properties");
+
+
+        String mailServerPropertiesFileRealPath = servletContext.getRealPath(mailServerPropertiesFileName);
+        String mailSendersPropertiesFileRealPath = servletContext.getRealPath(mailSendersPropertiesFileName);
+
+
+        Properties mailServerProperties = new Properties();
+        Properties mailSendersProperties = new Properties();
+
+        try {
+            Class.forName("ua.nure.pashneva.SummaryTask4.mail.MailManager");
+            Class.forName("ua.nure.pashneva.SummaryTask4.mail.Sender");
+
+            mailServerProperties.load(new FileInputStream(mailServerPropertiesFileRealPath));
+            mailSendersProperties.load(new FileInputStream(mailSendersPropertiesFileRealPath));
+
+            MailManager.setProperties(mailServerProperties, mailSendersProperties);
+        } catch (ClassNotFoundException eCl) {
+            throw new IllegalStateException("Cannot initialize MailManager");
+        } catch (IOException eIO) {
+            throw new IllegalStateException("Cannot load mailServerProperties or mailSendersProperties properties");
+        }
+
+    }
+
 	private void log(String msg) {
 		System.out.println("[ContextListener] " + msg);
 	}
