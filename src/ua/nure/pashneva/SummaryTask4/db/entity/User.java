@@ -1,5 +1,10 @@
 package ua.nure.pashneva.SummaryTask4.db.entity;
 
+/**
+ * Objects of this class are strings from the table users.
+ *
+ * @author Anastasia Pashneva
+ */
 public class User {
 
     private int id;
@@ -13,6 +18,16 @@ public class User {
     public User() {
     }
 
+    /**
+     * Constructor of class for creating object without without an identifier.
+     *
+     * @param login
+     * @param password
+     * @param firstName
+     * @param secondName
+     * @param role
+     * @param userStatus
+     */
     public User(String login, String password,
                 String firstName, String secondName,
                 Role role, UserStatus userStatus) {

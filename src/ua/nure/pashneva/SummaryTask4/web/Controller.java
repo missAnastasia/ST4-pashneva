@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * Main servlet controller.
  * 
- * @author D.Kolesnikov
+ * @author Anastasia Pashneva
  * 
  */
 public class Controller extends HttpServlet {
@@ -61,9 +61,10 @@ public class Controller extends HttpServlet {
 			LOG.trace("Error previousPage --> " + request.getAttribute("previousPage"));
 
 			request.getRequestDispatcher(forward).forward(request, response);*/
-
+            LOG.trace("Exception message --> " + ex.getMessage());
 			response.sendRedirect(Path.COMMAND_MESSAGE_ERROR + ex.getMessage());
 		}
+		LOG.debug("Controller finished");
 		/*LOG.trace("Forward address --> " + forward);
 
 		LOG.debug("Controller finished, now go to forward address --> " + forward);*/

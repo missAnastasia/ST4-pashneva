@@ -16,10 +16,10 @@ public interface UserDAO {
 
     /**
      * Method of creating a user in the database. <br/>
-     * After the method is executed, the user object contains the value of the identifier (id),
+     * After the method is executed the user object contains the value of the identifier (id),
      * this information comes from the DBMS side.
      *
-     * @param user object, that contains information about a user without an identifier.
+     * @param user object that contains information about a user without an identifier.
      * @return true - user was successfully inserted into database, otherwise - false.
      * @throws DBException
      */
@@ -29,7 +29,7 @@ public interface UserDAO {
      * Method of obtaining a user from the database.
      *
      * @param id user identifier (primary unique key)
-     * @return object, which contains values of all fields from table users.
+     * @return object which contains values of all fields from table users.
      * @throws DBException
      */
     User read(Integer id) throws DBException;
@@ -38,7 +38,7 @@ public interface UserDAO {
      * Method of obtaining a user from the database.
      *
      * @param login user login (email address)
-     * @return object, which contains values of all fields from table users.
+     * @return object which contains values of all fields from table users.
      * @throws DBException
      */
     User read(String login) throws DBException;
@@ -63,10 +63,10 @@ public interface UserDAO {
 
     /**
      * Method of updating user data in database. <br/>
-     * All fields are updated except the password,
+     * All fields are updated except the password
      * userStatus and role fields.
      *
-     * @param user object, that contains user data.
+     * @param user object that contains user data.
      *             The identifier must be present.
      * @return true - user data was successfully updated in database, otherwise - false.
      * @throws DBException
@@ -77,7 +77,7 @@ public interface UserDAO {
      * Method of updating user password in database. <br/>
      * Only password field is updated.
      *
-     * @param user object, that contains user data.
+     * @param user object that contains user data.
      *             The identifier must be present.
      * @return true - user password was successfully updated in database, otherwise - false.
      * @throws DBException
@@ -88,7 +88,7 @@ public interface UserDAO {
      * Method of updating user status in database.<br/>
      * Only userStatus field is updated.
      *
-     * @param user object, that contains user data.
+     * @param user object that contains user data.
      *             The identifier must be present.
      * @return true - user status was successfully updated in database, otherwise - false.
      * @throws DBException
@@ -98,7 +98,7 @@ public interface UserDAO {
     /**
      * Method of deleting user from database.
      *
-     * @param user object, that contains information about a user, who must be deleted.
+     * @param user object that contains information about a user who must be deleted.
      * @return true - user was successfully deleted from database, otherwise - false.
      * @throws DBException
      */

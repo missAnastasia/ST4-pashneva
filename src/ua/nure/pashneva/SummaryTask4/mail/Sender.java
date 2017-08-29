@@ -8,11 +8,27 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-
+/**
+ * The class that sends the e-mail. <br/>
+ * Mail server settings, senders and recipients data are specified through the class constructor.
+ *
+ * @author Anastasia Pashneva
+ */
 class Sender {
 
+    /**
+     * E-mail address of the sender.
+     */
     private String userName;
+
+    /**
+     * Password of the sender.
+     */
     private String password;
+
+    /**
+     * Object of Properties class which contains mail serves settings.
+     */
     private Properties serverProperties = new Properties();
 
     private static final Logger LOG = Logger.getLogger(Sender.class);
@@ -23,17 +39,16 @@ class Sender {
         this.password = password;
         LOG.trace("Password -->" + password);
         this.serverProperties = serverProperties;
-
-        /*serverProperties = new Properties();
-        serverProperties.put("mail.smtp.host", "smtp.properties.com");
-        serverProperties.put("mail.smtp.socketFactory.port", "465");
-        serverProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        serverProperties.put("mail.smtp.auth", "true");
-        serverProperties.put("mail.smtp.port", "465");*/
-
-
     }
 
+    /**
+     * Method for sending e-mail message from determined sender to recipient e-mail address.
+     *
+     * @param subject text of the subject part of e-mail message.
+     * @param text text of the main part of e-mail message.
+     * @param toEmail recipient e-mail address.
+     * @throws MessagingException
+     */
     public void send(String subject, String text, String toEmail) throws MessagingException {
         Session session = Session.getDefaultInstance(serverProperties, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {

@@ -7,19 +7,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import ua.nure.pashneva.SummaryTask4.db.entity.Role;
 import ua.nure.pashneva.SummaryTask4.db.entity.User;
 
 public class SessionManager {
 
-    public static final String ATT_NAME_CONNECTION = "connection";
-
+    private static final String ATT_NAME_CONNECTION = "connection";
     private static final String ATT_NAME_USER_NAME = "user_login";
+    private static final int COOKIE_MAX_AGE = 24 * 60 * 60;
+    private static final Logger LOG = Logger.getLogger(SessionManager.class);
 
     // Store Connection in request attribute.
     // (Information stored only exist during requests)
     public static void storeConnection(ServletRequest request, Connection conn) {
         request.setAttribute(ATT_NAME_CONNECTION, conn);
+        LOG.trace("Connection has been saved --> " + conn);
     }
 
     // Get the Connection object has been stored in one attribute of the request.
@@ -33,7 +36,9 @@ public class SessionManager {
 
         // On the JSP can access ${user}
         session.setAttribute("user", loginedUser);
+        LOG.trace("Logined user has been saved into session --> " + loginedUser);
         session.setAttribute("userRole", userRole);
+        LOG.trace("User role has been saved into session --> " + userRole);
     }
 
 
@@ -45,6 +50,7 @@ public class SessionManager {
 
     public static void storeUserToConfirmRegistration(HttpSession session, User userToConfirm) {
         session.setAttribute("userToConfirm", userToConfirm);
+        LOG.trace("User to confirm has been saved in session --> " + userToConfirm);
     }
 
     public static User getUserToConfirmRegistration(HttpSession session) {
@@ -54,12 +60,12 @@ public class SessionManager {
 
     // Store info in Cookie
     public static void storeUserCookie(HttpServletResponse response, User user) {
-        System.out.println("Store user cookie");
+        LOG.debug("Saving user cookie starts");
         Cookie cookieUserName = new Cookie(ATT_NAME_USER_NAME, user.getLogin());
-
         // 1 day (Convert to seconds)
-        cookieUserName.setMaxAge(24 * 60 * 60);
+        cookieUserName.setMaxAge(COOKIE_MAX_AGE);
         response.addCookie(cookieUserName);
+        LOG.debug("Saving user cookie finished");
     }
 
     public static String getUserNameInCookie(HttpServletRequest request) {
@@ -77,11 +83,10 @@ public class SessionManager {
 
     // Delete cookie.
     public static void deleteUserCookie(HttpServletResponse response) {
+        LOG.debug("Deleting user cookie starts");
         Cookie cookieUserName = new Cookie(ATT_NAME_USER_NAME, null);
-
-        // 0 seconds (Expires immediately)
         cookieUserName.setMaxAge(0);
         response.addCookie(cookieUserName);
+        LOG.debug("Deleting user cookie finished");
     }
-
 }

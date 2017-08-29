@@ -1,5 +1,8 @@
 package ua.nure.pashneva.SummaryTask4.db.entity;
 
+/**
+ * Objects of this class are strings from the table languages.
+ */
 public class Language {
 
     private int id;

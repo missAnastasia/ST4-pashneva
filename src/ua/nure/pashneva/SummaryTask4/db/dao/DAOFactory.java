@@ -15,7 +15,7 @@ public abstract class DAOFactory {
     private static DAOFactory instance;
 
     /**
-     * Contains the full qualified class name whose object will return {@link #getInstance ()}.
+     * Contains the full qualified class name whose object will return {@link #getInstance()}.
      */
     private static String daoFactoryFCN;
 
@@ -32,9 +32,9 @@ public abstract class DAOFactory {
 
     /**
      * Method for obtaining the DAOFactory object.
-     * The factory settings determines, which DAOFactory implementation will be returned.
+     * The factory settings determines which DAOFactory implementation will be returned.
      *
-     * @return an instance of the DAOFactory child, whose name is contained in {@link #daoFactoryFCN}.
+     * @return an instance of the DAOFactory child whose name is contained in {@link #daoFactoryFCN}.
      * @throws Exception
      */
     public static synchronized DAOFactory getInstance() throws Exception {
@@ -48,7 +48,7 @@ public abstract class DAOFactory {
     /**
      * Method for obtaining DAO for the User entity.
      *
-     * @return The implementation of the UserDAO,
+     * @return The implementation of the UserDAO
      *          which is determined by the factory settings {@link DAOFactory}.
      */
     public abstract UserDAO getUserDAO();
